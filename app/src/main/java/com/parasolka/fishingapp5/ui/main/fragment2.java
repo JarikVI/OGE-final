@@ -1,5 +1,6 @@
 package com.parasolka.fishingapp5.ui.main;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -18,6 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.parasolka.fishingapp5.CreateVideoPost;
 import com.parasolka.fishingapp5.MyAdapter;
 import com.parasolka.fishingapp5.MyAdapter2;
+import com.parasolka.fishingapp5.OGEv1;
+import com.parasolka.fishingapp5.OGEv2;
+import com.parasolka.fishingapp5.OGEv3;
+import com.parasolka.fishingapp5.OGEv4;
+import com.parasolka.fishingapp5.ProfileActivity;
 import com.parasolka.fishingapp5.R;
 import com.parasolka.fishingapp5.upload;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +36,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class fragment2 extends Fragment {
@@ -46,54 +54,27 @@ public class fragment2 extends Fragment {
     private ValueEventListener eventListener;
     Button btn;
 
+    @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment2_layout, container, false);
-        recycle2 = (RecyclerView) view.findViewById(R.id.recycler_view);
-        acc = FirebaseDatabase.getInstance().getReference().child("users");
-        btn = (Button) view.findViewById(R.id.button22);
-        acc = FirebaseDatabase.getInstance().getReference().child("users");
-
+        btn =(Button) view.findViewById(R.id.button11);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                ConnectivityManager manager = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            public void onClick(View v) {
+                ConnectivityManager manager= (ConnectivityManager)
+                        getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo activenetwork = manager.getActiveNetworkInfo();
-                if (null != activenetwork) {
-                    Intent i = new Intent(getActivity(), CreateVideoPost.class);
-                    startActivity(i);
-                } else {
-                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                if(null!=activenetwork){
+                    Intent i6 = new Intent(getActivity(), OGEv4.class);
+                    startActivity(i6);
                 }
-            }
-        });
-
-        LinearLayoutManager gridLayoutManager2 = new LinearLayoutManager(getContext());
-        recycle2.setLayoutManager(gridLayoutManager2);
-        gridLayoutManager2.setReverseLayout(true);
-        gridLayoutManager2.setStackFromEnd(true);
-        vapar = FirebaseAuth.getInstance().getCurrentUser();
-        userId = vapar.getUid();
-        prolist2 = new ArrayList<>();
-        MyAdapter2 myadapter2 = new MyAdapter2(getActivity(), prolist2);
-        recycle2.setAdapter(myadapter2);
-
-        refrence = FirebaseDatabase.getInstance().getReference("videoposts");
-
-        eventListener = refrence.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                prolist2.clear();
-                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    upload dete2 = itemSnapshot.getValue(upload.class);
-                    prolist2.add(dete2);
+                else
+                {
+                    Toast.makeText(v.getContext(),"No Internet Connection",Toast.LENGTH_SHORT).show();
                 }
-                myadapter2.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
         return view;

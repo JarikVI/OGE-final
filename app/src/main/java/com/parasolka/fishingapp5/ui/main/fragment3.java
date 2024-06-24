@@ -202,7 +202,6 @@ public class fragment3 extends Fragment {
             @Override
             public void onClick(View v) {
                 ConnectivityManager manager= (ConnectivityManager)
-
                         getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo activenetwork = manager.getActiveNetworkInfo();
                 if(null!=activenetwork){

@@ -18,6 +18,24 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Algebra"
+            android:exported="false" />
+        <activity
+            android:name=".OGEv4"
+            android:exported="false" />
+        <activity
+            android:name=".w"
+            android:exported="false" />
+        <activity
+            android:name=".OGEv3"
+            android:exported="false" />
+        <activity
+            android:name=".OGEv2"
+            android:exported="false" />
+        <activity
+            android:name=".OGEv1"
+            android:exported="false" />
+        <activity
             android:name=".RegistrationActivity"
             android:exported="false" />
         <activity

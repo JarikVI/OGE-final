@@ -1,5 +1,6 @@
 package com.parasolka.fishingapp5.ui.main;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -43,12 +44,12 @@ public class fragment1 extends Fragment {
     private ValueEventListener eventListener;
     Button btn;
 
+    @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment1_layout, container, false);
         btn = (Button) view.findViewById(R.id.button2);
-        recycle = (RecyclerView) view.findViewById(R.id.idRVInstaFeeds);
         acc = FirebaseDatabase.getInstance().getReference().child("users");
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +67,6 @@ public class fragment1 extends Fragment {
         });
 
         LinearLayoutManager gridLayoutManager = new LinearLayoutManager(getContext());
-        recycle.setLayoutManager(gridLayoutManager);
         gridLayoutManager.setReverseLayout(true);
         gridLayoutManager.setStackFromEnd(true);
 
@@ -74,7 +74,6 @@ public class fragment1 extends Fragment {
         userId = vapar.getUid();
         prolist = new ArrayList<>();
         myadapter = new MyAdapter(getActivity(), prolist);
-        recycle.setAdapter(myadapter);
 
         refrence = FirebaseDatabase.getInstance().getReference("posts");
 
